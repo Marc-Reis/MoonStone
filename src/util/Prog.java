@@ -1,3 +1,7 @@
+package util;
+
+import util.BNTMath;
+
 /**
  * Created by reisma on 09.06.15.
  */
@@ -5,10 +9,10 @@ public class Prog {
 
     public static void main(String[] args) {
 
-        // Deklaration einer Variable vom Typ BNTMath
+        // Deklaration einer Variable vom Typ util.BNTMath
         BNTMath meinBib;
-        // Zuweisung eines neuen Objektes erstellt von der Klasse BNTMath
-        // meinBib = Objekt der Klasse BNTMath
+        // Zuweisung eines neuen Objektes erstellt von der Klasse util.BNTMath
+        // meinBib = Objekt der Klasse util.BNTMath
         meinBib = new BNTMath();
 
         // Simulierte Eingabe (einfach festgelegt) für a und b (ohne operator)
