@@ -25,7 +25,7 @@ public class Sparnix {
         Konto schmitts = new Konto();
         Konto theis = new Konto();
 
-        schmitts.bez = "RObins Konto";
+        schmitts.bez = "Robins Konto";
         schmitts.kontostand = 1000000;
         schmitts.knr = "DE4711";
 
@@ -49,7 +49,7 @@ public class Sparnix {
     public static void kontoInfo(Konto [] alleKonten){
 
         while(true) {
-            Konto x = findeKonto(alleKonten, eingabe() );
+            Konto x = findeKonto(alleKonten, eingabe("Bitte Kontonummer angeben!") );
             ausgabe(x);
         }
 
@@ -75,11 +75,13 @@ public class Sparnix {
     /**
      * Erstellt einen Scanner, fragt nach der Kontonummer
      * und gibt diese als String zurück
+     * @param message  String der die Anzuzeigende Nachricht beinhaltet wie "Bitte Kontonummer eingeben"
      * @return String der Kontonummer
+     *
      */
-    public static String eingabe(){
+    public static String eingabe(String message){
         Scanner myScanner = new Scanner(System.in);
-        System.out.println("Bitte Kontonummer angeben!");
+        System.out.println(message);
 
         return  myScanner.next();
     }
@@ -90,10 +92,43 @@ public class Sparnix {
      */
     public static void ausgabe( Konto dasKonto){
         if( dasKonto != null ) {
+            // Ausgabe
             System.out.println(dasKonto.bez + " "
                     + dasKonto.kontostand + " "
                     + dasKonto.knr);
+            // Eine Einzahlung/Auszahlung tätigen?
+            String ein =  eingabe("Ein/Aus Zahlen ? E/A/N: ");
+            // Unterscheiden was der Benutzer will - nur E und A, alles andere führt zu keiner bearbeitung
+            switch (ein) {
+                case "E":
+                    kontostandAendern(dasKonto,  true);
+                    break;
+                case "A":
+                    kontostandAendern(dasKonto, false);
+                    break;
+                default:
+                    break;
+            }
         }
+    }
+
+    /**
+     * Aendert den Kontostand ab auf dem als Parameter uebergebenem Konto.
+     * Einzahlen wird genutzt um zu unterscheiden ob positiv oder negativ auf dem Kontostand gerechnet wird
+     * @param dasKonto das Konto auf dem gearbeitet wird
+     * @param einzahlen true, wenn es eine Einzahlung ist, false wenn es eine Auszahlung ist
+     */
+    public static void kontostandAendern(Konto dasKonto, boolean einzahlen){
+        double x = Double.parseDouble(      // Wert den die Methode einfabe liefert als Double parsen und speichern
+                eingabe("Betrag zur " +
+                        (einzahlen ? "Einzahlung":"Auszahlung") // wie ein if, wenn einzahlen true dann "einzahlung" sonst "auszahlung"
+                        + " bitte positiv angeben: " ) );
+        if( einzahlen)
+            dasKonto.kontostand =  dasKonto.kontostand + x;
+        else
+            dasKonto.kontostand =  dasKonto.kontostand - x;
+
+        System.out.println("Wir Danken! Aktueller Kontostand nun: "+dasKonto.kontostand);
     }
 
 
