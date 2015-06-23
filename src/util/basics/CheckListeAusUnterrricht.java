@@ -19,6 +19,8 @@ public class CheckListeAusUnterrricht {
 
         double flaeche = meineZahlenausgaben.kreisflaeche(3.0);
 
+        System.out.println(flaeche);
+
         /**
          //Thomas//
          long x;
