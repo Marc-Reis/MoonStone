@@ -1,107 +1,68 @@
-import org.newdawn.slick.*;
-import org.newdawn.slick.command.*;
-import org.newdawn.slick.svg.InkscapeLoader;
-import org.newdawn.slick.svg.SimpleDiagramRenderer;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.*;
 
 /**
- * Created by reisma on 27.05.15.
+ * Created by reisma on 24.06.15.
  */
+public class MoonStone {
 
-public class MoonStone extends BasicGame
-        implements InputProviderListener
-{
+    /**
+     * Startpunkt des Spiels durch main Methode - wie bei jedem (Java) Programm
+     * Es können argumente bei aufruf (java MoonStone -GoodMode) übergeben werden,
+     * diese landen im und als String im String Array.
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        // Wir erzeugen aus der Klasse Frame eine neues Objekt und speichern dieses (dessen "Referenz, Zeiger") auf f
+        // Der Frame ist der Fensterrahmen in dem Unser Spiel läuft/ gezeichnet wird
+        MoonFrame f = new MoonFrame();
 
-    private int posX,posY = 100;
-
-    private InputProvider inProvider;
-
-    private Command ckeyLeft = new BasicCommand("left");
-    private Command ckeyRight = new BasicCommand("right");
-
-    private Command ckeyUp = new BasicCommand("up");
-    private Command ckeyDown = new BasicCommand("down");
-
-    private String message="";
-
-    private Image imgFace;
-    private SimpleDiagramRenderer imgMan;
-    private String imgPathMarc = "res/MarcFreeMan.png";
-    private String strWelcome = "Hello World!";
-
-    public MoonStone(String gamename)
-    {
-        super(gamename);
-    }
-
-    @Override
-    public void init(GameContainer gc) throws SlickException {
-    
-        inProvider = new InputProvider(gc.getInput());
-        inProvider.addListener(this);
-
-        inProvider.bindCommand(new KeyControl(Input.KEY_LEFT), ckeyLeft);
-        inProvider.bindCommand(new KeyControl(Input.KEY_RIGHT), ckeyRight);
-        inProvider.bindCommand(new KeyControl(Input.KEY_UP), ckeyUp);
-        inProvider.bindCommand(new KeyControl(Input.KEY_DOWN), ckeyDown);
-
-        imgFace = new Image(imgPathMarc);
-
-        ///imgMan = new SimpleDiagramRenderer(InkscapeLoader.load("res/NewTux.svg")); imgMan.render(g);
-    }
-
-    @Override
-    public void update(GameContainer gc, int i) throws SlickException {}
-
-    @Override
-    public void render(GameContainer gc, Graphics g) throws SlickException
-    {
-        move();
-        imgFace.setRotation(30.0f);
-        imgFace.draw(posX, posY);
-        g.drawString(strWelcome, posX, posY);
+        // Klicken wir auf das x zum schießen im Fenster, so müssen wir festlegen was geschehen soll - in diesem Fall
+        // Wird das Programm beendet (Exit) wenn das fenster geschlossen wird (close)
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // Wir setzen die Auflösung/größe unseres Fensters
+        f.setSize(800, 600);
+        // Ein Fenster ist zu erst noch nicht sichtbar, bis wir im sagen das es sich zeigen soll
+        // (solange kann man im "verborgenen" daran arbeiten
+        f.setVisible(true);
+        // Das Fenster darf nicht in seiner größe verändert werden.
+        f.setResizable(false);
 
 
-        g.drawString(message + "x:" + posX + ", y:" + posY, 50, 50);
+        // Der Game Loop
+        // - Input abfragen,
+        // - unserem Objekt der Klasse Frame sagen, dass es sich zeichnen darf
+        //
 
+        while (true) {
+            // Input Verarbeiten - beachten Sie das Koordinatensystem! (y  hat positive Werte nach "unten" statt oben!)
+            //
+            if (f.getUp()) {
+                f.player_posy -= 5;
+            }
+            if (f.getDown()) {
+                f.player_posy += 5;
+            }
+            if (f.getRight()) {
+                f.player_posx += 5;
+            }
+            if (f.getLeft()) {
+                f.player_posx -= 5;
+            }
 
-;    }
+            // Zeichnen des Grafikinhalte
+            f.repaintScreen();
 
-    public void move(){
-
-        posX = inProvider.isCommandControlDown(ckeyLeft) ?  posX-1: posX;
-        posX = inProvider.isCommandControlDown(ckeyRight) ?  posX+1: posX;
-
-        posY = inProvider.isCommandControlDown(ckeyDown)?  posY+1: posY;
-        posY = inProvider.isCommandControlDown(ckeyUp)?  posY-1: posY;
-
-    }
-
-    public static void main(String[] args)
-    {
-        try
-        {
-            AppGameContainer appgc;
-            appgc = new AppGameContainer(new MoonStone("Simple Slick Game"));
-            appgc.setDisplayMode(1980, 1024, false);
-            appgc.start();
+            // while(true) ist eine endlosschleife, für gewähren anderen Prozessen auf der CPU auch noch Rechenzeit!
+            try {
+                // Wir VERSUCHEN den Thread für 15 ms schlafen zu lassen (kann mehr oder weniger sein!)
+                Thread.sleep(15);
+            } catch (InterruptedException e) {
+                // der "Versuch" kann scheitern,
+                // in dem Fall fangen wir den fehler ab und geben ihn auf der Kommandozeile aus
+                e.printStackTrace();
+            }
         }
-        catch (SlickException ex)
-        {
-            Logger.getLogger(MoonStone.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @Override
-    public void controlPressed(Command command) {
-
-    }
-
-    @Override
-    public void controlReleased(Command command) {
-        message = command.toString()+" pressed!";
     }
 
 
