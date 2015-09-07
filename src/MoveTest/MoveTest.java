@@ -13,6 +13,7 @@ public class MoveTest {
         f.setSize(800, 600);
         f.setVisible(true);
         f.setResizable(false);
+        
 
 
         while(true){
