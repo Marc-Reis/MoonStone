@@ -3,7 +3,7 @@ package util.basics;
 import java.awt.*;
 
 /**
- * Created by reisma on 14.07.15.
+ * Created by reisma on 14.07.15.‚
  */
 public class Auto {
     // Definition der Eigenschaften die wir im Programm abbilden möchten

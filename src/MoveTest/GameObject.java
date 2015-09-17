@@ -2,11 +2,9 @@ package MoveTest;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.List;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.*;
 
 /**
  * Created by reisma on 07.07.15.
@@ -19,15 +17,16 @@ public class GameObject {
     protected float f_posy;
     protected int worldsize_x;
     protected int worldsize_y;
+    private int test;
     //    private BufferedImage look;
-    // Animation
+    // Enemy
     protected BufferedImage[] look;
 
     protected java.util.List<Shot> shots;
 
     protected float timeSinceLastShot = 0;
     protected final float SHOTFREQUENZY = 0.1f;
-    //Animation
+    //Enemy
     private final static float NEEDEDANYTIME = 1;
     private float anyTime = 0;
 
@@ -70,8 +69,8 @@ public class GameObject {
             }
         }
         return look[look.length - 1];
-        //Non Animation
-        // return look;
+        //Non Enemy
+       // return look;
     }
 
     private void loadAnimationResource(String[] url) {
@@ -79,7 +78,7 @@ public class GameObject {
         look = new BufferedImage[ url.length];
         try {
             for (int x = 0; x < url.length; x++) {
-                look[x] = ImageIO.read(Animation.class.getClassLoader().getResourceAsStream(url[x]));
+                look[x] = ImageIO.read(Enemy.class.getClassLoader().getResourceAsStream(url[x]));
             }
         } catch (IOException e) {
             e.printStackTrace();

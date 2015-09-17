@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 /**
  * Created by reisma on 01.07.15.
  * Wir erzeugen eine Klasse welche die basis für das Anzuzeigende Fenster beinhaltet.
- * Die Kommunikation die hierzu mit dem Betriebsystem notwendig ist und viele weitere Arbeiten erledigt
+ * Die Kommunikation die hierzu mit dem Betriebssystem notwendig ist und viele weitere Arbeiten erledigt
  * allerdings schon eine Klasse JFrame der Java Entwickler. Wir machen uns dies zu nutze und "erben" diese
  * Funktionalität in dem wir die Klasse mit "extends" erweitern.
  */
@@ -21,29 +21,33 @@ public class MoonFrame extends JFrame {
     // Variablen zur spiecherung der Position des Spielers (als Kommazahl)
     float player_posx = 300;
     float player_posy = 300;
-    // Under Spiele ist ein rechteck und benötigt noch eine größe
+    // Unser Spieler ist ein rechteck und benötigt noch eine Größe
     private int player_size = 50;
 
-    // Boolsche Werte zum speichern des zustandes true, wenn
-    // die passende taste gedrückt wurde. (Hoch, runter, links, rechts)
+    // Boolsche Werte zum speichern des Zustandes "true", wenn
+    // die passende Taste gedrückt wurde. (Hoch, runter, links, rechts)
     private boolean key_up = false;
     private boolean key_down = false;
     private boolean key_left = false;
     private boolean key_right = false;
 
     // Der Konstruktor der Klasse MoonFrame (heißt genauso, - kein void oder Rückgabetyp
-    public MoonFrame() {
+    public MoonFrame(String title) {
+
         // Mit super rufen wir die "erweiterte" Klasse an bzw. deren Kontruktor und können in diesem Fall
         // den Titel des Fenster übergeben - achtung, der title ist eine Besondere Variable eine Idee Warum?
         super(title);
+        this.title =  title;
         screen = new Screen();
         // Wir setzen die Ausmaße unserer Leinwand, in diesem Fall 800x600
         screen.setBounds(0, 0, 800, 600);
-        // Unserem Frame können wir diese Leinwand mit geben, mittels add, als Komponente die im Fram liegen soll
+        // Unserem Frame können wir diese Leinwand mit geben, mittels add, als Komponente die im Frame liegen soll
         add(screen);
         // Damit wir überhaupt mitbekommen wenn eine Taste gedrückt wird, müssen wir einen "Listener" in diesem Fall
         // Keylistener hinzufügen. Dies zu verarbeiten erledigt dann unser KeyHandler.
-        addKeyListener(new KeyHandler());
+        KeyHandler meiner = new KeyHandler();
+        addKeyListener(meiner);
+
     }
 
     /**
@@ -115,6 +119,7 @@ public class MoonFrame extends JFrame {
          */
         @Override
         public void keyPressed(KeyEvent e) {
+
             // Prüfe ob des KeyEvents KeyCode (Taste) gleicher einer verdfinierte ist (z.B. "S") und reagiere entsprechend
             if (e.getKeyCode() == KeyEvent.VK_S) key_down = true;
             if (e.getKeyCode() == KeyEvent.VK_W) key_up = true;

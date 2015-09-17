@@ -15,7 +15,7 @@ public class MoonStone {
     public static void main(String[] args) {
         // Wir erzeugen aus der Klasse Frame eine neues Objekt und speichern dieses (dessen "Referenz, Zeiger") auf f
         // Der Frame ist der Fensterrahmen in dem Unser Spiel läuft/ gezeichnet wird
-        MoonFrame f = new MoonFrame();
+        MoonFrame f = new MoonFrame("test");
 
         // Klicken wir auf das x zum schießen im Fenster, so müssen wir festlegen was geschehen soll - in diesem Fall
         // Wird das Programm beendet (Exit) wenn das fenster geschlossen wird (close)

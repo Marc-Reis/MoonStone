@@ -1,12 +1,7 @@
 package MoveTest;
 
-/**
- * Created by reisma on 07.09.15.
- */
-package MoveTest;
-
-        import java.awt.event.KeyEvent;
-        import java.util.List;
+import java.awt.event.KeyEvent;
+import java.util.List;
 
 public class Player extends GameObject {
 

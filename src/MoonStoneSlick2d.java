@@ -66,7 +66,7 @@ public class MoonStoneSlick2d extends BasicGame
         g.drawString(message + "x:" + posX + ", y:" + posY, 50, 50);
 
 
-;    }
+    }
 
     public void move(){
 
