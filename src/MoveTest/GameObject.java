@@ -62,8 +62,11 @@ public class GameObject {
     }
 
     public BufferedImage getLook() {
+        // Ist ein Bild da? nee? dann null zurück geben, sonst das bild aus der folgenden Schleife
         if (look.length == 0) return null;
+        // Für alle Bilder (Texturen z.B. für die Animation von Enemy und Spieler)
         for (int i = 0; i < look.length; i++) {
+
             if (anyTime < (float) NEEDEDANYTIME / look.length * (i + 1)) {
                 return look[i];
             }

@@ -9,18 +9,20 @@ import javax.swing.JFrame;
 public class MoveTest {
 	public static void main(String[] args) {
 		List<Shot> shots = new LinkedList<Shot>();
-		List<MoveTest.Enemy> enemys = new LinkedList<MoveTest.Enemy>();
+		List<Enemy> enemys = new LinkedList<Enemy>();
+
 		String[] playerUrls = new String[2];
 		playerUrls[0] = "Gfx/Mega1.png";
         playerUrls[1] = "Gfx/Mega2.png";
-		Player player = new Player(300, 300, 800, 600, shots,playerUrls);
-		Background bg = new Background(100
+		Player player = new Player(300, 300, 800, 600, shots, playerUrls);
+
+		Background bg = new Background(100);
 
 		String[] enemysUrls = new String[2];
 		enemysUrls[0] =   "Gfx/Enemy1.png";
 		enemysUrls[1] =   "Gfx/Enemy2.png";
 
-		enemys.add(new MoveTest.Enemy(500,300, 800, 600, null, enemysUrls));
+		enemys.add(new Enemy(500,300, 800, 600, null, enemysUrls));
 		
 		Frame f = new Frame(player, bg, shots, enemys);
 		
@@ -49,9 +51,7 @@ public class MoveTest {
 			
 			player.update(timeSinceLastFrame);
 			bg.update(timeSinceLastFrame);
-			
-			f.repaintScreen();
-			
+
 			
 			for(int i = 0; i<shots.size(); i++){
 				shots.get(i).update(timeSinceLastFrame);
@@ -60,6 +60,8 @@ public class MoveTest {
 			for(int i = 0; i<enemys.size(); i++){
 				enemys.get(i).update(timeSinceLastFrame);
 			}
+
+			f.repaintScreen();
 			
 			try {
 				Thread.sleep(15);
