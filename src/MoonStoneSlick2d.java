@@ -1,6 +1,4 @@
-import org.newdawn.slick.*;
-import org.newdawn.slick.command.*;
-import org.newdawn.slick.svg.SimpleDiagramRenderer;
+
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,10 +7,10 @@ import java.util.logging.Logger;
  * Created by reisma on 27.05.15.
  */
 
-public class MoonStoneSlick2d extends BasicGame
-        implements InputProviderListener
+public class MoonStoneSlick2d //extends BasicGame
+       // implements InputProviderListener
 {
-
+/*
     private int posX,posY = 100;
 
     private InputProvider inProvider;
@@ -103,5 +101,5 @@ public class MoonStoneSlick2d extends BasicGame
         message = command.toString()+" pressed!";
     }
 
-
+*/
 }

@@ -90,8 +90,10 @@ public class Frame extends JFrame{
 		
 		g.drawImage(player.getLook(), player.getBounding().x,
 				player.getBounding().y, null);
+		g.drawString("Health: "+player.getHealth(),10,10);
 		
 		}
+
 	}
 	
 	

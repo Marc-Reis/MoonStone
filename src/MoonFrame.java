@@ -37,7 +37,7 @@ public class MoonFrame extends JFrame {
         // Mit super rufen wir die "erweiterte" Klasse an bzw. deren Kontruktor und können in diesem Fall
         // den Titel des Fenster übergeben - achtung, der title ist eine Besondere Variable eine Idee Warum?
         super(title);
-        this.title =  title;
+        MoonFrame.title =  title;
         screen = new Screen();
         // Wir setzen die Ausmaße unserer Leinwand, in diesem Fall 800x600
         screen.setBounds(0, 0, 800, 600);

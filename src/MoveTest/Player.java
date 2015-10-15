@@ -5,27 +5,34 @@ import java.util.List;
 
 public class Player extends GameObject {
 
-    public Player(int x, int y, int worldsize_x, int worldsize_y, List<Shot> shots, String[] graphicsUrl) {
-        super(x, y, worldsize_x, worldsize_y, shots, graphicsUrl);
+    public Player(int x, int y, int worldsize_x, int worldsize_y, List<Shot> shots, List<Enemy> enemy, String[] graphicsUrl) {
+        super(x, y, worldsize_x, worldsize_y, shots, enemy, graphicsUrl);
     }
 
     public void update(float timeSinceLastFrame) {
         super.update(timeSinceLastFrame);
 
-        if (Keyboard.isKeyDown(KeyEvent.VK_W)) f_posy -= 300 * timeSinceLastFrame;
-        if (Keyboard.isKeyDown(KeyEvent.VK_S)) f_posy += 300 * timeSinceLastFrame;
-        if (Keyboard.isKeyDown(KeyEvent.VK_D)) f_posx += 300 * timeSinceLastFrame;
-        if (Keyboard.isKeyDown(KeyEvent.VK_A)) f_posx -= 300 * timeSinceLastFrame;
+        if(getHealth() > 0) {
+
+            if (Keyboard.isKeyDown(KeyEvent.VK_W)) f_posy -= 300 * timeSinceLastFrame;
+            if (Keyboard.isKeyDown(KeyEvent.VK_S)) f_posy += 300 * timeSinceLastFrame;
+            if (Keyboard.isKeyDown(KeyEvent.VK_D)) f_posx += 300 * timeSinceLastFrame;
+            if (Keyboard.isKeyDown(KeyEvent.VK_A)) f_posx -= 300 * timeSinceLastFrame;
 
 
-        if (f_posx < 0) f_posx = 0;
-        if (f_posy < 0) f_posy = 0;
-        if (f_posx > worldsize_x - bounding.width) f_posx = worldsize_x - bounding.width;
-        if (f_posy > worldsize_y - bounding.height) f_posy = worldsize_y - bounding.height;
+            if (f_posx < 0) f_posx = 0;
+            if (f_posy < 0) f_posy = 0;
+            if (f_posx > worldsize_x - bounding.width) f_posx = worldsize_x - bounding.width;
+            if (f_posy > worldsize_y - bounding.height) f_posy = worldsize_y - bounding.height;
 
-        bounding.x = (int) f_posx;
-        bounding.y = (int) f_posy;
+            bounding.x = (int) f_posx;
+            bounding.y = (int) f_posy;
+        }
 
+    }
 
+    @Override
+    public String toString() {
+        return "Hallo ich bin auf"+f_posx+" und auf"+f_posy;
     }
 }

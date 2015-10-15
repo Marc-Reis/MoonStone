@@ -37,19 +37,25 @@ public class Shot {
 	   this.shots = shots;
 	}
 	// Vor dem Zeichnen...
-	public void update(float timeSinceLastFrame){
+	public boolean update(float timeSinceLastFrame){
+		boolean removeMe = false;
 		// Wie lange lebt der schuss schon?
 		timeAlive+=timeSinceLastFrame;
 		// zu lange? dann fort damit!
 		if(timeAlive>TIMETOLIVE){
-			shots.remove(this);
+
+				//shots.remove(this);
+				return removeMe = true;
+
 		}
+
 		// die Position bestimmen (Geschwindigkeit * vergangene Zeit)
 		f_posx+=f_speedx*timeSinceLastFrame;
 		f_posy+=f_speedy*timeSinceLastFrame;
 		//Position der Boundingbox anpassen zur neuen Position
 		bounding.x = (int)f_posx;
 		bounding.y = (int)f_posy;
+		return removeMe;
 	}
 	 
 	public Rectangle getBounding(){
